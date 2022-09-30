@@ -37,19 +37,19 @@ parser.add_argument("--output_train", type=str, help="output_train directory")
 
 args = parser.parse_args()
 
-print("Argument 1: %s" % args.input_data)
-print("Argument 2: %s" % args.output_train)
+print(f"Argument 1: {args.input_data}")
+print(f"Argument 2: {args.output_train}")
 
-if not (args.output_train is None):
+if args.output_train is not None:
     os.makedirs(args.output_train, exist_ok=True)
-    print("%s created" % args.output_train)
-    
+    print(f"{args.output_train} created")
+
 web_path ='https://dprepdata.blob.core.windows.net/demo/Titanic.csv'
 titanic_ds = Dataset.Tabular.from_delimited_files(path=web_path, set_column_types={'Survived': DataType.to_bool()})
 
 # preview the first 3 rows of titanic_ds
 #titanic_ds.take(3).to_pandas_dataframe()
-    
+
 #df = args.input_data.to_pandas_dataframe()
 
 df = titanic_ds.to_pandas_dataframe()
